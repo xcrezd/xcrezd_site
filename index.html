@@ -3,12 +3,617 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>xcrezd</title>
+    <title>Xcrezd | Software Solutions Studio</title>
+    <meta name="description" content="Xcrezd designs and builds software solutions for product teams, startups, and enterprises. Web platforms, data systems, AI integrations, and automation.">
+    <meta property="og:title" content="Xcrezd | Software Solutions Studio">
+    <meta property="og:description" content="Custom software solutions: web platforms, data systems, AI integrations, and automation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xcrezd.com/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f2ec;
+        --bg-deep: #efe4d8;
+        --ink: #1c1c1a;
+        --ink-muted: #4c463f;
+        --accent: #e4572e;
+        --accent-dark: #b23a1f;
+        --accent-soft: #f4b183;
+        --line: #d8c7b4;
+        --card: #fff8ef;
+        --shadow: 0 20px 60px rgba(36, 28, 20, 0.15);
+        --radius-lg: 22px;
+        --radius-md: 16px;
+        --radius-sm: 10px;
+        --max: 1160px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at top right, rgba(228, 87, 46, 0.18), transparent 40%),
+          radial-gradient(circle at 10% 20%, rgba(244, 177, 131, 0.35), transparent 45%),
+          linear-gradient(160deg, var(--bg) 0%, var(--bg-deep) 100%);
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: repeating-linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.2) 0,
+            rgba(255, 255, 255, 0.2) 1px,
+            transparent 1px,
+            transparent 10px
+          );
+        pointer-events: none;
+        opacity: 0.35;
+        z-index: -1;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .wrap {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(14px);
+        background: rgba(246, 242, 236, 0.75);
+        border-bottom: 1px solid rgba(216, 199, 180, 0.6);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+        gap: 16px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: conic-gradient(from 210deg, var(--accent), var(--accent-soft), #f8d3b1, var(--accent));
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+        font-size: 0.95rem;
+      }
+
+      .nav-links a {
+        padding: 8px 10px;
+        border-radius: 999px;
+        transition: background 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        background: rgba(228, 87, 46, 0.12);
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--accent);
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 999px;
+        font-weight: 600;
+        box-shadow: 0 12px 24px rgba(228, 87, 46, 0.25);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 30px rgba(228, 87, 46, 0.35);
+      }
+
+      .hero {
+        padding: 90px 0 70px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 40px;
+        align-items: center;
+      }
+
+      .hero h1 {
+        font-family: "Fraunces", serif;
+        font-size: clamp(2.8rem, 3vw + 2rem, 4.2rem);
+        line-height: 1.05;
+        margin-bottom: 18px;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        color: var(--ink-muted);
+        margin-bottom: 28px;
+        max-width: 520px;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid var(--line);
+        padding: 12px 18px;
+        border-radius: 999px;
+        font-weight: 600;
+        color: var(--ink);
+        background: #fff8ef;
+      }
+
+      .hero-card {
+        background: var(--card);
+        border-radius: var(--radius-lg);
+        padding: 28px;
+        border: 1px solid rgba(216, 199, 180, 0.6);
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 18px;
+      }
+
+      .hero-card h3 {
+        font-size: 1.2rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(228, 87, 46, 0.12);
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--accent-dark);
+        width: fit-content;
+      }
+
+      .grid {
+        display: grid;
+        gap: 24px;
+      }
+
+      .grid.cols-3 {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .section h2 {
+        font-family: "Fraunces", serif;
+        font-size: clamp(2rem, 2vw + 1rem, 2.8rem);
+        margin-bottom: 16px;
+      }
+
+      .section p.lead {
+        color: var(--ink-muted);
+        font-size: 1.05rem;
+        max-width: 760px;
+        margin-bottom: 32px;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: var(--radius-md);
+        padding: 24px;
+        border: 1px solid rgba(216, 199, 180, 0.7);
+        box-shadow: 0 12px 30px rgba(36, 28, 20, 0.08);
+      }
+
+      .card h3 {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+
+      .card p {
+        color: var(--ink-muted);
+        line-height: 1.5;
+      }
+
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 18px;
+      }
+
+      .metric {
+        padding: 18px;
+        border-radius: var(--radius-sm);
+        background: #fff;
+        border: 1px solid rgba(216, 199, 180, 0.7);
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 1.6rem;
+        margin-bottom: 4px;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 14px;
+      }
+
+      .timeline-item {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .timeline-dot {
+        width: 14px;
+        height: 14px;
+        margin-top: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        flex-shrink: 0;
+      }
+
+      .cta-banner {
+        background: #1c1c1a;
+        color: #fef6ed;
+        border-radius: var(--radius-lg);
+        padding: 36px;
+        display: grid;
+        gap: 20px;
+        align-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .cta-banner p {
+        color: rgba(254, 246, 237, 0.85);
+      }
+
+      .cta-banner .cta {
+        background: #fef6ed;
+        color: #1c1c1a;
+      }
+
+      footer {
+        padding: 50px 0 70px;
+        border-top: 1px solid rgba(216, 199, 180, 0.6);
+        color: var(--ink-muted);
+      }
+
+      footer .wrap {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        animation: reveal 0.9s ease forwards;
+      }
+
+      .reveal.delay-1 {
+        animation-delay: 0.15s;
+      }
+
+      .reveal.delay-2 {
+        animation-delay: 0.3s;
+      }
+
+      .reveal.delay-3 {
+        animation-delay: 0.45s;
+      }
+
+      @keyframes reveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 860px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 60px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .hero h1 {
+          font-size: 2.6rem;
+        }
+
+        .cta-banner {
+          padding: 28px;
+        }
+      }
+    </style>
   </head>
   <body>
+    <header>
+      <div class="wrap nav">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Xcrezd</span>
+        </div>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#process">Process</a>
+          <a href="#governance">AI Governance</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="cta" href="#contact">Start a project</a>
+      </div>
+    </header>
+
     <main>
-      <h1>xcrezd.com</h1>
-      <p>Site is live.</p>
+      <section class="wrap hero">
+        <div class="reveal">
+          <div class="pill">Software solutions studio</div>
+          <h1>Build the platforms your business runs on.</h1>
+          <p>
+            Xcrezd partners with teams that need reliable, modern software. We design, build, and launch
+            web platforms, data systems, and AI-enabled workflows that scale with your business.
+          </p>
+          <div class="hero-actions">
+            <a class="cta" href="#contact">Book a discovery call</a>
+            <a class="ghost" href="#services">Explore services</a>
+          </div>
+        </div>
+        <div class="hero-card reveal delay-1">
+          <h3>What we deliver</h3>
+          <div class="stack">
+            <div>
+              <strong>Product engineering</strong>
+              <p>Full-stack web apps, internal tools, and customer portals with measurable outcomes.</p>
+            </div>
+            <div>
+              <strong>Data and AI systems</strong>
+              <p>ETL pipelines, analytics dashboards, and AI integrations that respect governance.</p>
+            </div>
+            <div>
+              <strong>Automation</strong>
+              <p>Workflow automation, API orchestration, and custom integrations to reduce manual work.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section wrap" id="services">
+        <h2 class="reveal">Services built for growing teams</h2>
+        <p class="lead reveal delay-1">
+          We design and build durable software with product strategy, engineering, and operational
+          excellence baked in. You get a partner that ships and supports real outcomes.
+        </p>
+        <div class="grid cols-3">
+          <div class="card reveal">
+            <h3>Product strategy</h3>
+            <p>Discovery, roadmap planning, and prototyping to validate the right solution fast.</p>
+          </div>
+          <div class="card reveal delay-1">
+            <h3>Web platforms</h3>
+            <p>Customer-facing platforms, internal tools, and dashboards built with modern stacks.</p>
+          </div>
+          <div class="card reveal delay-2">
+            <h3>Data engineering</h3>
+            <p>Data modeling, pipelines, and reporting that enable decisions, not just metrics.</p>
+          </div>
+          <div class="card reveal">
+            <h3>AI integrations</h3>
+            <p>LLM-powered features, semantic search, and workflow copilots with guardrails.</p>
+          </div>
+          <div class="card reveal delay-1">
+            <h3>Cloud architecture</h3>
+            <p>Scalable infrastructure, cost-aware design, and secure deployment automation.</p>
+          </div>
+          <div class="card reveal delay-2">
+            <h3>Ongoing support</h3>
+            <p>Monitoring, iteration, and roadmap support to keep your systems resilient.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section wrap" id="work">
+        <h2 class="reveal">Work that ships and scales</h2>
+        <p class="lead reveal delay-1">
+          From idea to production, we keep velocity without sacrificing quality, compliance, or UX.
+        </p>
+        <div class="grid cols-3">
+          <div class="card reveal">
+            <h3>Operations hub</h3>
+            <p>Built a unified operations portal for a logistics provider, cutting manual work by 42%.</p>
+          </div>
+          <div class="card reveal delay-1">
+            <h3>Customer analytics</h3>
+            <p>Delivered a real-time analytics suite with automated reporting and role-based access.</p>
+          </div>
+          <div class="card reveal delay-2">
+            <h3>AI support desk</h3>
+            <p>Implemented an AI-assisted support workflow with human review and audit trails.</p>
+          </div>
+        </div>
+        <div class="metrics">
+          <div class="metric reveal">
+            <strong>6-12 wks</strong>
+            <span>Typical MVP delivery</span>
+          </div>
+          <div class="metric reveal delay-1">
+            <strong>99.9%</strong>
+            <span>Uptime targets</span>
+          </div>
+          <div class="metric reveal delay-2">
+            <strong>30%+</strong>
+            <span>Average process time saved</span>
+          </div>
+          <div class="metric reveal delay-3">
+            <strong>Global</strong>
+            <span>Remote-first team</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section wrap" id="process">
+        <h2 class="reveal">A clear, collaborative process</h2>
+        <p class="lead reveal delay-1">
+          We align early, ship fast, and keep everything measurable. You always know what is next.
+        </p>
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <span class="timeline-dot"></span>
+            <div>
+              <h3>1. Discovery</h3>
+              <p>Workshops, stakeholder interviews, and a clear definition of success metrics.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal delay-1">
+            <span class="timeline-dot"></span>
+            <div>
+              <h3>2. Design + architecture</h3>
+              <p>UX flows, technical architecture, and security requirements aligned up front.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal delay-2">
+            <span class="timeline-dot"></span>
+            <div>
+              <h3>3. Build + iterate</h3>
+              <p>Agile delivery with weekly demos, QA, and performance monitoring.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal delay-3">
+            <span class="timeline-dot"></span>
+            <div>
+              <h3>4. Launch + support</h3>
+              <p>Production rollout, analytics, and ongoing enhancements as your needs evolve.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section wrap" id="governance">
+        <h2 class="reveal">AI governance and responsible use</h2>
+        <p class="lead reveal delay-1">
+          We follow strict controls for data privacy, model access, and human oversight. Our approach
+          aligns with enterprise compliance requirements and Azure AI policies.
+        </p>
+        <div class="grid cols-3">
+          <div class="card reveal">
+            <h3>Data protection</h3>
+            <p>Data minimization, encryption in transit and at rest, and least-privilege access.</p>
+          </div>
+          <div class="card reveal delay-1">
+            <h3>Human review</h3>
+            <p>Human-in-the-loop workflows for sensitive decisions, with audit trails and logging.</p>
+          </div>
+          <div class="card reveal delay-2">
+            <h3>Model controls</h3>
+            <p>Usage monitoring, prompt filtering, and safety testing before production rollout.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section wrap" id="about">
+        <h2 class="reveal">About Xcrezd</h2>
+        <p class="lead reveal delay-1">
+          Xcrezd is a software solutions company that builds mission-critical products for teams that
+          need speed and accountability. We are remote-first and work with clients globally.
+        </p>
+        <div class="grid cols-3">
+          <div class="card reveal">
+            <h3>Industries</h3>
+            <p>Logistics, fintech, SaaS, healthcare, retail, and operations-heavy teams.</p>
+          </div>
+          <div class="card reveal delay-1">
+            <h3>Tech stack</h3>
+            <p>React, Node.js, Python, cloud-native architectures, and data platforms.</p>
+          </div>
+          <div class="card reveal delay-2">
+            <h3>Engagements</h3>
+            <p>Dedicated product squads, advisory retainers, and full end-to-end delivery.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section wrap" id="contact">
+        <div class="cta-banner reveal">
+          <div>
+            <h2>Ready to build with Xcrezd?</h2>
+            <p>Tell us what you need and we will respond within one business day.</p>
+          </div>
+          <div class="stack">
+            <a class="cta" href="mailto:hello@xcrezd.com">hello@xcrezd.com</a>
+            <span>Remote-first. Available globally.</span>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer>
+      <div class="wrap">
+        <div>
+          <strong>Xcrezd</strong>
+          <p>Software solutions for modern teams.</p>
+        </div>
+        <div>
+          <strong>Contact</strong>
+          <p>Email: hello@xcrezd.com</p>
+          <p>Website: xcrezd.com</p>
+        </div>
+        <div>
+          <strong>Capabilities</strong>
+          <p>Product engineering, data systems, AI integrations, cloud automation.</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
